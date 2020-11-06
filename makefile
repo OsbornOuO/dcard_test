@@ -5,7 +5,16 @@ test.unit.service:
 
 test.all:
 	test.unit.service
-	test.unit.delivery
 
 server:
 	PROJ_DIR=$p GOFLAGS=-mod=vendor go run ./main.go server
+
+heroku.push:
+	heroku container:push web -a dcard-test --recursive
+
+heroku.release:
+	heroku container:release web -a dcard-test
+
+heroku.deploy:
+	make heroku.push
+	make heroku.release

@@ -3,6 +3,7 @@ package configuration
 import (
 	"dcard/internal/http"
 	"dcard/internal/redis"
+	"encoding/json"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -31,6 +32,18 @@ func New() (*Configuration, error) {
 	viper.AutomaticEnv()
 
 	var config Configuration
+	configStr := viper.GetString("CONFIG_APP")
+	if configStr != "" {
+		if err := json.Unmarshal([]byte(configStr), &config); err != nil {
+			log.Err(err).Msgf("Fail to unmarshal config env to struct, env: %s\n", configStr)
+		} else {
+			if viper.GetString("PORT") != "" {
+				config.HTTP.Address = ":" + viper.GetString("PORT")
+			}
+
+			return &config, nil
+		}
+	}
 
 	configPath := viper.GetString("CONFIG_PATH")
 	if configPath == "" {
