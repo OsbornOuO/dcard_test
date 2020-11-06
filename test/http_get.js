@@ -2,9 +2,8 @@ import { check, sleep } from 'k6';
 import http from 'k6/http';
 
 export let options = {
-    duration: '60s',
-    vus: 1,
-    rps: 2
+    duration: '1s',
+    rps: 61
 };
 export default function () {
     let res = http.get('http://0.0.0.0:8080/v1/hello');
