@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"strings"
 
+	goredis "github.com/go-redis/redis/v8"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 	"gitlab.com/howmay/gopher/zlog"
@@ -42,7 +43,14 @@ func New() (*Configuration, error) {
 			}
 
 			if viper.GetString("REDISCLOUD_URL") != "" {
-				config.Redis.Address = ":" + viper.GetString("REDISCLOUD_URL")
+				opt, err := goredis.ParseURL(viper.GetString("REDISCLOUD_URL"))
+				if err != nil {
+					panic(err)
+				}
+				config.Redis.Address = opt.Addr
+				config.Redis.DB = opt.DB
+				config.Redis.Username = opt.Username
+				config.Redis.Password = opt.Password
 			}
 
 			return &config, nil

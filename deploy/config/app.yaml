@@ -10,4 +10,4 @@ http:
   debug: true
   address: ":8080"
 redis:
-  address: ":6379"
+  address: "redis-15222.c80.us-east-1-2.ec2.cloud.redislabs.com:15222"
