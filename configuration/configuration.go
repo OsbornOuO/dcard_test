@@ -41,6 +41,10 @@ func New() (*Configuration, error) {
 				config.HTTP.Address = ":" + viper.GetString("PORT")
 			}
 
+			if viper.GetString("REDISCLOUD_URL") != "" {
+				config.Redis.Address = ":" + viper.GetString("REDISCLOUD_URL")
+			}
+
 			return &config, nil
 		}
 	}
