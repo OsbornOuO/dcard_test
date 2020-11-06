@@ -21,6 +21,7 @@ type Config struct {
 func New(cfg *Config) (*redis.Client, error) {
 	redisClient := redis.NewClient(&redis.Options{
 		Addr:     cfg.Address,
+		Username: cfg.Username,
 		Password: cfg.Password, // no password set
 		DB:       cfg.DB,       // use default DB
 	})
