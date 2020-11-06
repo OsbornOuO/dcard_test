@@ -1,0 +1,13 @@
+app:
+  ip_rate_limiting_count: 60
+  ip_rate_limiting_sec: 60
+log:
+  app_id: dcard
+  env: local
+  debug: true
+  local: true
+http:
+  debug: true
+  address: ":8080"
+redis:
+  address: ":6379"
