@@ -9,7 +9,7 @@ export let options = {
 export default function () {
     let res = http.get(__ENV.API_SERVER_URL);
     check(res, {
-        'status was 200': (r) => r.status == 200,
-        'status was 429': (r) => r.status == 429,
+        'status was 200 and response data.count = is 1 ~ 60': (r) => r.status == 200 && 0<r.json("data.count")<=60,
+        'status was 429 and response error_message = "Error"': (r) => r.status == 429 && r.json("error_message") == "Error",
     });
-}
+}   
