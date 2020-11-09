@@ -27,6 +27,10 @@ API_SERVER_URL=https://dcard-test.herokuapp.com/v1/hello k6 run test/http_get.js
 
 ## 結果
 一分鐘總共打 121 次 (k6 最後看起來會多打一次) , rps 為 2
+
+60次 為通過 rate limiting, 有取得 1 ~ 60 的 Response 
+61次 為 error 未取得 1 ~ 60, response 為 Error
+
 ```
 running (1m00.0s), 0/1 VUs, 121 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  1m0s
